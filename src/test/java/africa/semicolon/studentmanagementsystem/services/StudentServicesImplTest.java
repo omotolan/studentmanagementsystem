@@ -3,7 +3,7 @@ package africa.semicolon.studentmanagementsystem.services;
 import africa.semicolon.studentmanagementsystem.data.models.Student;
 import africa.semicolon.studentmanagementsystem.dto.request.RegisterStudentRequest;
 import africa.semicolon.studentmanagementsystem.dto.response.RegisterStudentResponse;
-import africa.semicolon.studentmanagementsystem.exceptions.NoSuchStudentException;
+import africa.semicolon.studentmanagementsystem.exceptions.StudentDoesNotExistException;
 import africa.semicolon.studentmanagementsystem.util.enums.Gender;
 import africa.semicolon.studentmanagementsystem.util.enums.StudentType;
 import org.junit.jupiter.api.Test;
@@ -59,12 +59,22 @@ public class StudentServicesImplTest {
     @Test
     public void testThatStudentCanBeFoundByIdThrowsException(){
 
-        assertThrows(NoSuchStudentException.class, ()->{studentService.getStudentById("ST00390");});
+        assertThrows(StudentDoesNotExistException.class, ()->{studentService.getStudentById("ST00390");});
 
     }
     @Test()
     public void testThatAllStudentsCanBeGotten(){
         List<Student> studentList = studentService.getAllStudent();
+        assertEquals(" ", studentList);
+    }
+    @Test
+    public void testToFindStudentsByClass(){
+        List<Student> studentList = studentService.getStudentsByClass("studentClass");
+        assertEquals(" ", studentList);
+    }
+    @Test
+    public void testToFindStudentsByStudentType(){
+        List<Student> studentList = studentService.getStudentByStudentType(StudentType.BOARDING);
     }
 
 }

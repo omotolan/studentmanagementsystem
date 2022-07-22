@@ -6,10 +6,7 @@ import africa.semicolon.studentmanagementsystem.services.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/student")
@@ -23,4 +20,11 @@ public class StudentController {
         ApiResponse apiResponse = new ApiResponse(true, serviceResponse);
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllStudent(){
+        var serviceResponse = studentService.getAllStudent();
+        ApiResponse apiResponse = new ApiResponse(true, serviceResponse);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
 }
